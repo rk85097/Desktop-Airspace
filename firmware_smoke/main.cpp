@@ -1225,13 +1225,6 @@ void drawCenteredScopeText(int y, const char* value, uint16_t color, int scale =
   drawScopeText(max(8, 240 - w / 2), y, value, color, scale);
 }
 
-void drawFixedScopeText(int x, int y, const char* value, uint16_t color, int scale = 2) {
-  const bool wasEnabled = output_rotation_enabled;
-  output_rotation_enabled = false;
-  drawScopeText(x, y, value, color, scale);
-  output_rotation_enabled = wasEnabled;
-}
-
 void drawPill(int x, int y, int w, int h, uint16_t border, uint16_t fill) {
   const int r = h / 2;
   fillRect(x + r, y, w - h, h, fill);
@@ -1613,16 +1606,16 @@ void drawFrame() {
     const uint16_t cardinalText = rgb888To565(display_state.cardinalLabelColor ? display_state.cardinalLabelColor : display_state.labelColor);
     const uint16_t ordinalText = rgb888To565(display_state.ordinalLabelColor ? display_state.ordinalLabelColor : display_state.labelColor);
     if (display_state.cardinalLabelsEnabled) {
-      drawFixedScopeText(235, 16, "N", cardinalText, 2);
-      drawFixedScopeText(235, 450, "S", cardinalText, 2);
-      drawFixedScopeText(18, 238, "W", cardinalText, 2);
-      drawFixedScopeText(438, 238, "E", cardinalText, 2);
+      drawScopeText(235, 16, "N", cardinalText, 2);
+      drawScopeText(235, 450, "S", cardinalText, 2);
+      drawScopeText(18, 238, "W", cardinalText, 2);
+      drawScopeText(438, 238, "E", cardinalText, 2);
     }
     if (display_state.ordinalLabelsEnabled) {
-      drawFixedScopeText(83, 78, "NW", ordinalText, 1);
-      drawFixedScopeText(382, 78, "NE", ordinalText, 1);
-      drawFixedScopeText(83, 393, "SW", ordinalText, 1);
-      drawFixedScopeText(382, 393, "SE", ordinalText, 1);
+      drawScopeText(83, 78, "NW", ordinalText, 1);
+      drawScopeText(382, 78, "NE", ordinalText, 1);
+      drawScopeText(83, 393, "SW", ordinalText, 1);
+      drawScopeText(382, 393, "SE", ordinalText, 1);
     }
     if (static_cache_available) {
       memcpy(static_framebuffer, framebuffer, kWidth * kHeight * sizeof(uint16_t));
