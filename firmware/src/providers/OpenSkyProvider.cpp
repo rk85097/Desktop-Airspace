@@ -51,6 +51,7 @@ bool OpenSkyProvider::fetchAircraft(geo::Location origin, uint16_t radiusNm, std
   HTTPClient http;
   http.setTimeout(4500);
   http.setReuse(false);
+  http.useHTTP10(true);
   http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
   if (!http.begin(client, makeBoundsUrl(origin, radiusNm))) {
     status_.lastError = ProviderError::Network;
