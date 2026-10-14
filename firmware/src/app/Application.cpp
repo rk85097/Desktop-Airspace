@@ -175,6 +175,7 @@ bool fetchAircraftMetadata(const Aircraft& source, Aircraft* enrichment, uint16_
   client->setInsecure();
   http->setTimeout(timeoutMs);
   http->setReuse(false);
+  http->useHTTP10(true);
   http->setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
   const String url = "https://api.adsbdb.com/v0/aircraft/" + icao24;
   if (!http->begin(*client, url)) {
@@ -255,6 +256,7 @@ bool fetchRouteEnrichment(const Aircraft& source, Aircraft* enrichment, uint16_t
   client->setInsecure();
   http->setTimeout(timeoutMs);
   http->setReuse(false);
+  http->useHTTP10(true);
   http->setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
   const String url = "https://api.adsbdb.com/v0/callsign/" + callsign;
   if (!http->begin(*client, url)) {

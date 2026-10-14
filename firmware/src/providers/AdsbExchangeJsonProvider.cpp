@@ -115,6 +115,7 @@ bool AdsbExchangeJsonProvider::fetchAircraft(geo::Location origin, uint16_t radi
   HTTPClient http;
   http.setTimeout(3500);
   http.setReuse(false);
+  http.useHTTP10(true);
   http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
   const bool began = secure ? http.begin(secureClient, url) : http.begin(plainClient, url);
   if (!began) {
@@ -221,6 +222,7 @@ bool AdsbExchangeJsonProvider::fetchOptionalRoute(Aircraft* aircraft) {
   HTTPClient http;
   http.setTimeout(2500);
   http.setReuse(false);
+  http.useHTTP10(true);
   http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
   const String url = "https://api.adsbdb.com/v0/callsign/" + callsign;
   if (!http.begin(client, url)) return false;

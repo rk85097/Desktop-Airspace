@@ -60,6 +60,7 @@ bool LocalDump1090Provider::fetchAircraft(geo::Location origin, uint16_t radiusN
   HTTPClient http;
   http.setTimeout(1200);
   http.setReuse(false);
+  http.useHTTP10(true);
   if (!http.begin(client, url_)) {
     status_.lastError = ProviderError::Network;
     status_.message = "local receiver begin failed";
